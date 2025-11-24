@@ -1,4 +1,4 @@
-import prisma from "../config/create.js";
+import prisma from "../config/prismaInstance.js";
 export const createNote = async (req, res, next) => {
     try {
         const { title, content } = req.body;

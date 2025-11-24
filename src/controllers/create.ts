@@ -1,7 +1,12 @@
-import prisma from "../config/create.js";
+import prisma from "../config/prismaInstance.js";
 
 import type { Request, Response, NextFunction } from "express";
+import { z } from "zod";
 
+const noteSchema = z.object({
+  title: z.string().min(1).max(30),
+  content: z.string().min(10),
+});
 
 export const createNote = async (
   req: Request,
@@ -9,7 +14,7 @@ export const createNote = async (
   next: NextFunction
 ) => {
   try {
-    const { title, content } = req.body;
+    const { title, content } = noteSchema.parse(req.body);
 
     if (!title || !content) {
       return res
