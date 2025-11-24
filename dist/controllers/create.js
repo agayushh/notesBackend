@@ -1,7 +1,12 @@
 import prisma from "../config/prismaInstance.js";
+import { z } from "zod";
+const noteSchema = z.object({
+    title: z.string().min(1).max(30),
+    content: z.string().min(10),
+});
 export const createNote = async (req, res, next) => {
     try {
-        const { title, content } = req.body;
+        const { title, content } = noteSchema.parse(req.body);
         if (!title || !content) {
             return res
                 .status(400)
