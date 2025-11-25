@@ -1,22 +1,31 @@
 import prisma from "../config/prismaInstance.js";
 export const readAllNotes = async (req, res, next) => {
     try {
-        const allNotes = await prisma.notes.findMany({
-            orderBy: {
-                createdAt: "desc",
-            },
-            select: {
-                serial: true,
-                title: true,
-                content: true,
-                createdAt: true,
-                updatedAt: true,
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
+        const [notes, totalCount] = await Promise.all([
+            prisma.notes.findMany({
+                skip,
+                take: limit,
+                orderBy: {
+                    createdAt: "desc",
+                },
+            }),
+            prisma.notes.count(),
+        ]);
+        const totalPages = Math.ceil(totalCount / limit);
+        return res.status(200).json({
+            notes,
+            pagination: {
+                currentPage: page,
+                totalPages,
+                totalCount,
+                limit,
+                hasNext: page < totalPages,
+                hasPrevious: page > 1,
             },
         });
-        if (allNotes.length === 0) {
-            return res.status(400).json({ message: "no notes there" });
-        }
-        return res.status(200).json({ message: "your notes", notes: allNotes });
     }
     catch (error) {
         next(error);
