@@ -1,1 +1,1 @@
-{"root":["./src/index.ts","./src/config/prismaInstance.ts","./src/controllers/create.ts","./src/controllers/read.ts","./src/controllers/readOne.ts","./src/controllers/updateNotes.ts","./src/middleware/errorHandling.ts","./src/routes/notesRoute.ts"],"version":"5.9.3"}
+{"root":["./src/index.ts","./src/config/prismaInstance.ts","./src/controllers/create.ts","./src/controllers/deleteNotes.ts","./src/controllers/read.ts","./src/controllers/readOne.ts","./src/controllers/updateNotes.ts","./src/middleware/errorHandling.ts","./src/routes/notesRoute.ts"],"version":"5.9.3"}

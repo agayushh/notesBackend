@@ -1,1 +1,1 @@
-{"version":3,"file":"notesRoute.d.ts","sourceRoot":"","sources":["../../src/routes/notesRoute.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,SAAS,CAAC;AAMjC,QAAA,MAAM,KAAK,EAAE,MAAiB,CAAC;AAO/B,eAAe,KAAK,CAAC"}
+{"version":3,"file":"notesRoute.d.ts","sourceRoot":"","sources":["../../src/routes/notesRoute.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,SAAS,CAAC;AAOjC,QAAA,MAAM,KAAK,EAAE,MAAiB,CAAC;AAQ/B,eAAe,KAAK,CAAC"}
