@@ -21,7 +21,6 @@ export const readAllNotes = async (
       }),
       prisma.notes.count(),
     ]);
-
     const totalPages = Math.ceil(totalCount / limit);
     return res.status(200).json({
       notes,

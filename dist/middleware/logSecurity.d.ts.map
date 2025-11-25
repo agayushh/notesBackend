@@ -1,0 +1,1 @@
+{"version":3,"file":"logSecurity.d.ts","sourceRoot":"","sources":["../../src/middleware/logSecurity.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,YAAY,EAAE,OAAO,EAAE,QAAQ,EAAE,MAAM,SAAS,CAAC;AAE/D,eAAO,MAAM,aAAa,GACxB,KAAK,OAAO,EACZ,KAAK,QAAQ,EACb,MAAM,YAAY,SAYnB,CAAC"}
