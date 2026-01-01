@@ -1,4 +1,3 @@
-import { boolean, startsWith } from "zod";
 export const extractRequestMetadata = (req) => {
     const ip = req.headers["x-forwarded-for"]?.toString().split(",")[0]?.trim() ||
         req.headers["x-real-ip"]?.toString() ||
@@ -35,25 +34,25 @@ export const parseUserAgent = (userAgent) => {
     const isMobile = /mobile/i.test(userAgent);
     const isTablet = /tablet|ipad/i.test(userAgent);
     const isDesktop = !isMobile && !isTablet;
-    const browser = /chrome/i.test(userAgent)
-        ? "Chrome"
-        : /firefox/i.test(userAgent)
-            ? "Firefox"
-            : /safari/i.test(userAgent)
-                ? "Safari"
-                : /edge/i.test(userAgent)
-                    ? "Edge"
+    const browser = /edg/i.test(userAgent)
+        ? "Edge"
+        : /chrome/i.test(userAgent)
+            ? "Chrome"
+            : /firefox/i.test(userAgent)
+                ? "Firefox"
+                : /safari/i.test(userAgent)
+                    ? "Safari"
                     : "Unknown";
     const os = /windows/i.test(userAgent)
         ? "Windows"
-        : /linux/i.test(userAgent)
-            ? "Linux"
-            : /ios/i.test(userAgent)
+        : /android/i.test(userAgent)
+            ? "Android"
+            : /iphone|ipad|ipod/i.test(userAgent)
                 ? "iOS"
                 : /mac/i.test(userAgent)
                     ? "MacOS"
-                    : /android/i.test(userAgent)
-                        ? "Android"
+                    : /linux/i.test(userAgent)
+                        ? "Linux"
                         : "Unknown";
     return { isMobile, isTablet, isDesktop, os, browser };
 };

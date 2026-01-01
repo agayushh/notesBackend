@@ -1,6 +1,5 @@
 import type { Request } from "express";
 import type { RequestMetadata } from "../types/RequestMetaData.js";
-import { boolean, startsWith } from "zod";
 
 export const extractRequestMetadata = (req: Request): RequestMetadata => {
   const ip =
@@ -46,27 +45,28 @@ export const parseUserAgent = (userAgent: string) => {
   const isTablet = /tablet|ipad/i.test(userAgent);
   const isDesktop = !isMobile && !isTablet;
 
-  const browser = /chrome/i.test(userAgent)
+  const browser = /edg/i.test(userAgent)
+    ? "Edge"
+    : /chrome/i.test(userAgent)
     ? "Chrome"
     : /firefox/i.test(userAgent)
     ? "Firefox"
     : /safari/i.test(userAgent)
     ? "Safari"
-    : /edge/i.test(userAgent)
-    ? "Edge"
     : "Unknown";
 
   const os = /windows/i.test(userAgent)
     ? "Windows"
-    : /linux/i.test(userAgent)
-    ? "Linux"
-    : /ios/i.test(userAgent)
+    : /android/i.test(userAgent)
+    ? "Android"
+    : /iphone|ipad|ipod/i.test(userAgent)
     ? "iOS"
     : /mac/i.test(userAgent)
     ? "MacOS"
-    : /android/i.test(userAgent)
-    ? "Android"
+    : /linux/i.test(userAgent)
+    ? "Linux"
     : "Unknown";
+
 
   return { isMobile, isTablet, isDesktop, os, browser };
 };

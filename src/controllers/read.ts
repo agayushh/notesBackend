@@ -27,6 +27,7 @@ export const readAllNotes = async (
       pagination: {
         currentPage: page,
         totalPages,
+        skip,
         totalCount,
         limit,
         hasNext: page < totalPages,
