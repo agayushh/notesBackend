@@ -6,5 +6,5 @@ node_modules
 
 /src/generated/prisma
 
-./dist/*
-./dist
+dist/
+
