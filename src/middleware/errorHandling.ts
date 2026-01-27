@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import type { Request, Response, NextFunction } from "express";
 import { ZodError } from "zod";
 
@@ -16,12 +17,13 @@ export const errorHandler = (
       errors: error.issues.map((err) => ({
         path: err.path.join("."),
         message: err.message,
+        code: err.code,
       })),
     });
   }
 
   // Handle Prisma errors
-  if (error.constructor.name === "PrismaClientKnownRequestError") {
+  if (error instanceof Prisma.PrismaClientKnownRequestError) {
     return res.status(400).json({
       message: "Database error",
       error: error.message,

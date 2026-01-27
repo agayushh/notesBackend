@@ -14,6 +14,6 @@ app.use(requestLogger);
 app.use("/notes", route);
 app.use(errorHandler); 
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log("Server is running");
 });
