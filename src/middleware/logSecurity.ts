@@ -7,12 +7,21 @@ export const requestLogger = (
 ) => {
   const metaData = extractRequestMetadata(req);
 
-  console.log({
-    timeStamp: new Date().toISOString(),
-    method: req.method,
-    path: req.path,
-    ...metaData,
-  });
+  const startTime = Date.now();
+
+  res.on("finish",() => {
+    const endTime = Date.now();
+    const duration = endTime - startTime;
+    console.log({
+      timeStamp: new Date().toISOString(),
+      method: req.method,
+      path: req.path,
+      status: res.statusCode,
+      duration: `${duration} ms`,
+      ...metaData,
+    });
+  })
+
 
   return next();
 };
