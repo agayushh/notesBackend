@@ -18,6 +18,9 @@ export const extractRequestMetadata = (req: Request): RequestMetadata => {
   const acceptLanguage = req.headers["accept-language"]?.toString() || "";
   const contentType = req.headers["content-type"]?.toString() || "";
   const authorization = req.headers["authorization"]?.toString() || "";
+  const host  = req.headers["host"]?.toString() || "";
+  const path = req.path;
+  const url = host+ path;
 
   const customHeaders: Record<string, string> = {};
   Object.keys(req.headers).forEach((key) => {
@@ -32,6 +35,8 @@ export const extractRequestMetadata = (req: Request): RequestMetadata => {
     ip,
     userAgent,
     origin,
+    host,
+    url,
     referer,
     acceptLanguage,
     contentType,

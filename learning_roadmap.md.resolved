@@ -43,7 +43,7 @@ src/utils/queryParser.ts         - Parse & validate query params
 **Why Learn This First**: All database and I/O operations are asynchronous.
 
 **Concepts to Master:**
-- What is a Promise? (pending, fulfilled, rejected)
+- What is a Promise? (pending, fulfilled, rejected) 
 - Creating promises with `new Promise()`
 - `.then()` and `.catch()` chains
 - `async/await` syntax
