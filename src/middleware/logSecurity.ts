@@ -3,13 +3,13 @@ import { extractRequestMetadata } from "../utils/getMetaData.js";
 export const requestLogger = (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const metaData = extractRequestMetadata(req);
 
   const startTime = Date.now();
 
-  res.on("finish",() => {
+  res.on("finish", () => {
     const endTime = Date.now();
     const duration = endTime - startTime;
     console.log({
@@ -20,8 +20,7 @@ export const requestLogger = (
       duration: `${duration} ms`,
       ...metaData,
     });
-  })
-
+  });
 
   return next();
 };
