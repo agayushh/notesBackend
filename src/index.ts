@@ -3,12 +3,14 @@ import route from "./routes/notesRoute.js";
 import cors from "cors";
 import { errorHandler } from "./middleware/errorHandling.js";
 import { requestLogger } from "./middleware/logSecurity.js";
+import { sanitizeRequest } from "./middleware/sanitizer.js";
 
 const app = express();
 
 app.use(cors());
 app.set("trust-proxy", true);
 app.use(express.json());
+app.use(sanitizeRequest);
 app.use(requestLogger);
 
 app.use("/notes", route);

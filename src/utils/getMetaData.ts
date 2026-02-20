@@ -17,10 +17,9 @@ export const extractRequestMetadata = (req: Request): RequestMetadata => {
   const referer = req.headers["referer"]?.toString() || "";
   const acceptLanguage = req.headers["accept-language"]?.toString() || "";
   const contentType = req.headers["content-type"]?.toString() || "";
-  const authorization = req.headers["authorization"]?.toString() || "";
-  const host  = req.headers["host"]?.toString() || "";
+  const host = req.headers["host"]?.toString() || "";
   const path = req.path;
-  const url = host+ path;
+  const url = host + path;
 
   const customHeaders: Record<string, string> = {};
   Object.keys(req.headers).forEach((key) => {
@@ -40,7 +39,6 @@ export const extractRequestMetadata = (req: Request): RequestMetadata => {
     referer,
     acceptLanguage,
     contentType,
-    authorization,
     customHeaders,
   };
 };
@@ -53,25 +51,24 @@ export const parseUserAgent = (userAgent: string) => {
   const browser = /edg/i.test(userAgent)
     ? "Edge"
     : /chrome/i.test(userAgent)
-    ? "Chrome"
-    : /firefox/i.test(userAgent)
-    ? "Firefox"
-    : /safari/i.test(userAgent)
-    ? "Safari"
-    : "Unknown";
+      ? "Chrome"
+      : /firefox/i.test(userAgent)
+        ? "Firefox"
+        : /safari/i.test(userAgent)
+          ? "Safari"
+          : "Unknown";
 
   const os = /windows/i.test(userAgent)
     ? "Windows"
     : /android/i.test(userAgent)
-    ? "Android"
-    : /iphone|ipad|ipod/i.test(userAgent)
-    ? "iOS"
-    : /mac/i.test(userAgent)
-    ? "MacOS"
-    : /linux/i.test(userAgent)
-    ? "Linux"
-    : "Unknown";
-
+      ? "Android"
+      : /iphone|ipad|ipod/i.test(userAgent)
+        ? "iOS"
+        : /mac/i.test(userAgent)
+          ? "MacOS"
+          : /linux/i.test(userAgent)
+            ? "Linux"
+            : "Unknown";
 
   return { isMobile, isTablet, isDesktop, os, browser };
 };
