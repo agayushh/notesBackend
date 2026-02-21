@@ -1,4 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
+import type { SanitizedReqType } from "../types/SanitizedReqType.js";
 
 const SENSITIVE_FIELDS = [
   "password",
@@ -46,7 +47,7 @@ export const sanitizeRequest = (
   res: Response,
   next: NextFunction,
 ) => {
-  res.locals.sanitized = {
+  const sanitized: SanitizedReqType = {
     body:
       req.body && typeof req.body === "object"
         ? redactObject(req.body)
@@ -55,6 +56,8 @@ export const sanitizeRequest = (
     query: redactObject(req.query as Record<string, unknown>),
     params: redactObject(req.params as Record<string, unknown>),
   };
+
+  res.locals.sanitized = sanitized;
 
   return next();
 };
