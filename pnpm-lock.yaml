@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@prisma/client':
         specifier: 6.15.0
-        version: 6.15.0(prisma@6.15.0)
+        version: 6.15.0(prisma@6.15.0(typescript@5.9.3))(typescript@5.9.3)
       '@types/express':
         specifier: ^5.0.5
         version: 5.0.5
@@ -31,7 +31,7 @@ importers:
         version: 3.1.11
       prisma:
         specifier: 6.15.0
-        version: 6.15.0
+        version: 6.15.0(typescript@5.9.3)
       winston:
         specifier: ^3.19.0
         version: 3.19.0
@@ -45,6 +45,9 @@ importers:
       '@types/node':
         specifier: ^24.10.1
         version: 24.10.1
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
 
 packages:
 
@@ -708,6 +711,11 @@ packages:
     resolution: {integrity: sha512-OZs6gsjF4vMp32qrCbiVSkrFmXtG/AZhY3t0iAMrMBiAZyV9oALtXO8hsrHbMXF9x6L3grlFuwW2oAz7cav+Gw==}
     engines: {node: '>= 0.6'}
 
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   undefsafe@2.0.5:
     resolution: {integrity: sha512-WxONCrssBM8TSPRqN5EmsjVrsv4A8X12J4ArBiiayv3DyyG3ZlIg6yysuuSYdZsVz3TKcTg2fd//Ujd4CHV1iA==}
 
@@ -749,9 +757,10 @@ snapshots:
       enabled: 2.0.0
       kuler: 2.0.0
 
-  '@prisma/client@6.15.0(prisma@6.15.0)':
+  '@prisma/client@6.15.0(prisma@6.15.0(typescript@5.9.3))(typescript@5.9.3)':
     optionalDependencies:
-      prisma: 6.15.0
+      prisma: 6.15.0(typescript@5.9.3)
+      typescript: 5.9.3
 
   '@prisma/config@6.15.0':
     dependencies:
@@ -1300,10 +1309,12 @@ snapshots:
       exsolve: 1.0.8
       pathe: 2.0.3
 
-  prisma@6.15.0:
+  prisma@6.15.0(typescript@5.9.3):
     dependencies:
       '@prisma/config': 6.15.0
       '@prisma/engines': 6.15.0
+    optionalDependencies:
+      typescript: 5.9.3
     transitivePeerDependencies:
       - magicast
 
@@ -1454,6 +1465,8 @@ snapshots:
       content-type: 1.0.5
       media-typer: 1.1.0
       mime-types: 3.0.2
+
+  typescript@5.9.3: {}
 
   undefsafe@2.0.5: {}
 

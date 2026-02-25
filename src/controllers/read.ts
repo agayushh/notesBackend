@@ -1,12 +1,9 @@
 import type { NextFunction, Request, Response } from "express";
 import prisma from "../config/prismaInstance.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-export const readAllNotes = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
+export const readAllNotes = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const page = parseInt(req.query.page as string) || 1;
     const limit = parseInt(req.query.limit as string) || 10;
     const skip = (page - 1) * limit;
@@ -34,7 +31,5 @@ export const readAllNotes = async (
         hasPrevious: page > 1,
       },
     });
-  } catch (error) {
-    next(error);
-  }
-};
+  },
+);

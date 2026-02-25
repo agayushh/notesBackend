@@ -1,6 +1,8 @@
 import { Prisma } from "@prisma/client";
 import type { Request, Response, NextFunction } from "express";
 import { ZodError } from "zod";
+import { errorMessages } from "../utils/ErrorMessage.js";
+import { HTTP_STATUS } from "../utils/httpStatus.js";
 
 export const errorHandler = (
   error: Error,
@@ -12,8 +14,9 @@ export const errorHandler = (
 
   // Handle Zod validation errors
   if (error instanceof ZodError) {
-    return res.status(400).json({
-      message: "Validation error",
+    return res.status(HTTP_STATUS.BAD_REQUEST).json({
+      success: false,
+      message: errorMessages.API.NOT_FOUND,
       errors: error.issues.map((err) => ({
         path: err.path.join("."),
         message: err.message,
@@ -24,15 +27,17 @@ export const errorHandler = (
 
   // Handle Prisma errors
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
-    return res.status(400).json({
-      message: "Database error",
+    return res.status(HTTP_STATUS.BAD_REQUEST).json({
+      success: false,
+      message: errorMessages.API.NOT_FOUND,
       error: error.message,
     });
   }
 
   // Default error
-  return res.status(500).json({
-    message: "Internal server error",
+  return res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
+    success: false,
+    message: errorMessages.API.INTERNAL_SERVER_ERROR,
     error: process.env.NODE_ENV === "development" ? error.message : undefined,
   });
 };

@@ -1,34 +1,26 @@
 import prisma from "../config/prismaInstance.js";
-
-import type { Request, Response, NextFunction } from "express";
+import type { Request, Response } from "express";
 import { z } from "zod";
+import { HTTP_STATUS } from "../utils/httpStatus.js";
+import { errorMessages } from "../utils/ErrorMessage.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
 const noteSchema = z.object({
-  title: z.string().min(1).max(30),
-  content: z.string().min(10),
+  title: z.string().min(1, {message: errorMessages.API.NOT_FOUND}).max(30, {message: errorMessages.API.NOT_FOUND}),
+  content: z.string().min(10, {message: errorMessages.API.NOT_FOUND}),
+}); 
+
+export const createNote = asyncHandler(async (req: Request, res: Response) => {
+  const { title, content } = noteSchema.parse(req.body);
+
+
+  const note = await prisma.notes.create({
+    data: { title, content },
+  });
+
+  return res.status(HTTP_STATUS.CREATED).json({
+    success: true,
+    data: note,
+    
+  });
 });
-
-export const createNote = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
-    const { title, content } = noteSchema.parse(req.body);
-
-    if (!title || !content) {
-      return res
-        .status(400)
-        .json({ message: "title and content are required" });
-    }
-
-    const note = await prisma.notes.create({
-      data: { title, content },
-    });
-
-    return res.status(201).json(note);
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-};
