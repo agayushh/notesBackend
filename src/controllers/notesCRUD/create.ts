@@ -1,9 +1,9 @@
-import prisma from "../config/prismaInstance.js";
+import prisma from "../../config/prismaInstance.js";
 import type { Request, Response } from "express";
 import { z } from "zod";
-import { HTTP_STATUS } from "../utils/httpStatus.js";
-import { errorMessages } from "../utils/ErrorMessage.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import { HTTP_STATUS } from "../../utils/httpStatus.js";
+import { errorMessages } from "../../utils/ErrorMessage.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
 
 const noteSchema = z.object({
   title: z.string().min(1, {message: errorMessages.API.NOT_FOUND}).max(30, {message: errorMessages.API.NOT_FOUND}),

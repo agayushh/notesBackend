@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
-import prisma from "../config/prismaInstance.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
-import { HTTP_STATUS } from "../utils/httpStatus.js";
+import prisma from "../../config/prismaInstance.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
+import { HTTP_STATUS } from "../../utils/httpStatus.js";
 
 export const deleteNotes = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {

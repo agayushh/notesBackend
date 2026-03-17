@@ -1,9 +1,9 @@
 import { Router } from "express";
-import { createNote } from "../controllers/create.js";
-import { readAllNotes } from "../controllers/read.js";
-import { readById } from "../controllers/readOne.js";
-import { updateNotes } from "../controllers/updateNotes.js";
-import { deleteNotes } from "../controllers/deleteNotes.js";
+import { createNote } from "../controllers/notesCRUD/create.js";
+import { readAllNotes } from "../controllers/notesCRUD/read.js";
+import { readById } from "../controllers/notesCRUD/readOne.js";
+import { updateNotes } from "../controllers/notesCRUD/updateNotes.js";
+import { deleteNotes } from "../controllers/notesCRUD/deleteNotes.js";
 
 const route: Router = Router();
 

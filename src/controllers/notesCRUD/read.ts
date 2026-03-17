@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
-import prisma from "../config/prismaInstance.js";
-import { asyncHandler } from "../utils/asyncHandler.js";
+import prisma from "../../config/prismaInstance.js";
+import { asyncHandler } from "../../utils/asyncHandler.js";
 
 export const readAllNotes = asyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
