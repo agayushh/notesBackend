@@ -1,12 +1,9 @@
 import type { NextFunction, Request, Response } from "express";
 import prisma from "../config/prismaInstance.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-export const updateNotes = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
+export const updateNotes = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
 
     if (!id) {
@@ -39,7 +36,5 @@ export const updateNotes = async (
     return res
       .status(200)
       .json({ message: "Note updated successfully", note: updateNote });
-  } catch (error) {
-    next(error);
-  }
-};
+  },
+);

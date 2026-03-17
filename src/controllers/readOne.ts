@@ -1,12 +1,9 @@
-import type { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, RequestHandler, Response } from "express";
 import prisma from "../config/prismaInstance.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-export const readById = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  try {
+export const readById = asyncHandler(
+  async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
 
     if (!id) {
@@ -30,7 +27,5 @@ export const readById = async (
       message: "notes of the id",
       notes: notesById,
     });
-  } catch (error) {
-    next(error);
-  }
-};
+  },
+);

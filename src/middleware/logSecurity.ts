@@ -1,6 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
 import { extractRequestMetadata } from "../utils/getMetaData.js";
-import { timeStamp } from "console";
 export const requestLogger = (
   req: Request,
   res: Response,
