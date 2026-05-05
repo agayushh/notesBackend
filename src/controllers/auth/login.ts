@@ -1,7 +1,6 @@
 import { type Request, type Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../config/prismaInstance.js";
 
-const prisma = new PrismaClient();
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;
@@ -10,7 +9,7 @@ export const login = async (req: Request, res: Response) => {
     return res.json({ message: "incorrect" }).status(400);
   }
 
-  const user = await prisma.users.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
       email,
     },
