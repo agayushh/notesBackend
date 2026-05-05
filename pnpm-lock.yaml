@@ -17,6 +17,9 @@ importers:
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
+      cookie-parser:
+        specifier: ^1.4.7
+        version: 1.4.7
       cors:
         specifier: ^2.8.5
         version: 2.8.6
@@ -45,6 +48,9 @@ importers:
       '@types/cors':
         specifier: ^2.8.19
         version: 2.8.19
+      '@types/jsonwebtoken':
+        specifier: ^9.0.10
+        version: 9.0.10
       '@types/node':
         specifier: ^24.10.1
         version: 24.12.2
@@ -120,6 +126,12 @@ packages:
 
   '@types/http-errors@2.0.5':
     resolution: {integrity: sha512-r8Tayk8HJnX0FztbZN7oVqGccWgw98T/0neJphO91KkmOzug1KkofZURD4UaD5uH8AqcFLfdPErnBod0u71/qg==}
+
+  '@types/jsonwebtoken@9.0.10':
+    resolution: {integrity: sha512-asx5hIG9Qmf/1oStypjanR7iKTv0gXQ1Ov/jfrX6kS/EO0OFni8orbmGCn0672NHR3kXHwpAwR+B368ZGN/2rA==}
+
+  '@types/ms@2.1.0':
+    resolution: {integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA==}
 
   '@types/node@24.12.2':
     resolution: {integrity: sha512-A1sre26ke7HDIuY/M23nd9gfB+nrmhtYyMINbjI1zHJxYteKR6qSMX56FsmjMcDb3SMcjJg5BiRRgOCC/yBD0g==}
@@ -241,6 +253,13 @@ packages:
   content-type@1.0.5:
     resolution: {integrity: sha512-nTjqfcBFEipKdXCv4YDQWCfmcLZKm81ldF0pAopTvyrFGVbcR6P/VAAd5G7N+0tTr8QqiU0tFadD6FK4NtJwOA==}
     engines: {node: '>= 0.6'}
+
+  cookie-parser@1.4.7:
+    resolution: {integrity: sha512-nGUvgXnotP3BsjiLX2ypbQnWoGUPIIfHQNZkkC668ntrzGWEZVW70HDEB1qnNGMicPje6EttlIgzo51YSwNQGw==}
+    engines: {node: '>= 0.8.0'}
+
+  cookie-signature@1.0.6:
+    resolution: {integrity: sha512-QADzlaHc8icV8I7vbaJXJwod9HWYp8uCqf1xa4OfNu1T7JVxQIrUgOWtHdNDtPiywmFbiS12VjotIXLrKM3orQ==}
 
   cookie-signature@1.2.2:
     resolution: {integrity: sha512-D76uU73ulSXrD1UXF4KE2TMxVVwhsnCgfAyTg9k8P6KGZjlXKrOLe4dJQKI3Bxi5wjesZoFXJWElNWBjPZMbhg==}
@@ -845,6 +864,13 @@ snapshots:
 
   '@types/http-errors@2.0.5': {}
 
+  '@types/jsonwebtoken@9.0.10':
+    dependencies:
+      '@types/ms': 2.1.0
+      '@types/node': 24.12.2
+
+  '@types/ms@2.1.0': {}
+
   '@types/node@24.12.2':
     dependencies:
       undici-types: 7.16.0
@@ -980,6 +1006,13 @@ snapshots:
   content-disposition@1.1.0: {}
 
   content-type@1.0.5: {}
+
+  cookie-parser@1.4.7:
+    dependencies:
+      cookie: 0.7.2
+      cookie-signature: 1.0.6
+
+  cookie-signature@1.0.6: {}
 
   cookie-signature@1.2.2: {}
 
