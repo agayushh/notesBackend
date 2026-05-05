@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Notes {
+model Note {
   serial    Int         @id @default(autoincrement())
   title     String
   content   String
@@ -24,19 +24,18 @@ enum Roles {
   Editor
 }
 
-model Users {
+model User {
   id       Int         @id @default(autoincrement())
-  name     String
-  username String?     @unique
+  name     String?
   email    String      @unique
   password String
   notes    notesUser[]
 }
 
 model notesUser {
-  user    Users @relation(fields: [userId], references: [id])
+  user    User @relation(fields: [userId], references: [id])
   userId  Int
-  note    Notes @relation(fields: [notesId], references: [serial])
+  note    Note @relation(fields: [notesId], references: [serial])
   notesId Int
 
   role Roles
