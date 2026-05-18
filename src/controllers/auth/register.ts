@@ -29,6 +29,14 @@ export const register = async (req: Request, res: Response) => {
       password: hashpassword,
     },
   });
+
+  const newSession = await prisma.session.create({
+    data: {
+      userId: createdUser.id,
+      createdAt: new Date(Date.now()),
+      expiresAt: new Date(Date.now() + 7 * 24 * 1000 * 60 * 60),
+    },
+  });
   const accessToken = jwt.sign(
     {
       userId: createdUser.id,
@@ -39,12 +47,13 @@ export const register = async (req: Request, res: Response) => {
   const refreshToken = jwt.sign(
     {
       userId: createdUser.id,
+      sessionId: newSession.sessionId,
     },
     process.env.REFRESH_TOKEN_SECRET!,
     { expiresIn: "7d" },
   );
-  await prisma.user.update({
-    where: { id: createdUser.id },
+  await prisma.session.update({
+    where: { sessionId: newSession.sessionId },
     data: { refreshToken },
   });
   const { password: _, ...safeUser } = createdUser;
