@@ -4,23 +4,35 @@ import { z } from "zod";
 import { HTTP_STATUS } from "../../utils/httpStatus.js";
 import { errorMessages } from "../../utils/ErrorMessage.js";
 import { asyncHandler } from "../../utils/asyncHandler.js";
+import type { AuthRequest } from "../../types/AuthRequest.js";
 
 const noteSchema = z.object({
-  title: z.string().min(1, {message: errorMessages.API.NOT_FOUND}).max(30, {message: errorMessages.API.NOT_FOUND}),
-  content: z.string().min(10, {message: errorMessages.API.NOT_FOUND}),
-}); 
-
-export const createNote = asyncHandler(async (req: Request, res: Response) => {
-  const { title, content } = noteSchema.parse(req.body);
-
-
-  const note = await prisma.notes.create({
-    data: { title, content },
-  });
-
-  return res.status(HTTP_STATUS.CREATED).json({
-    success: true,
-    data: note,
-    
-  });
+  title: z
+    .string()
+    .min(1, { message: errorMessages.API.NOT_FOUND })
+    .max(30, { message: errorMessages.API.NOT_FOUND }),
+  content: z.string().min(10, { message: errorMessages.API.NOT_FOUND }),
 });
+
+export const createNote = asyncHandler(
+  async (req: AuthRequest, res: Response) => {
+    const { title, content } = noteSchema.parse(req.body);
+    await prisma.$transaction(async (tx) => {
+      const note = await tx.note.create({
+        data: { title, content },
+      });
+
+      await tx.notesUser.create({
+        data: {
+          userId: req.user?.userId as number,
+          notesId: note.serial,
+          role: "Admin",
+        },
+      });
+      return res.status(HTTP_STATUS.CREATED).json({
+        success: true,
+        data: note,
+      });
+    });
+  },
+);
